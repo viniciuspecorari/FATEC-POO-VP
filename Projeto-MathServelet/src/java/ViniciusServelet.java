@@ -70,7 +70,7 @@ public class ViniciusServelet extends HttpServlet {
                 out.println("<tr>");
                     out.println("<td>1290482012015</td>");
                     out.println("<td>VINICIUS PECORARI</td>");
-                    out.println("<td><a href='https://itda.com.br/anna20/encurtador.e.aspx?WGNvBf'>https://itda.com.br/anna20/encurtador.e.aspx?WGNvBf</a></td>");
+                    out.println("<td><a href='https://github.com/viniciuspecorari'>https://github.com/viniciuspecorari</a></td>");
                 out.println("</tr>");
             
             //FIM TABELA
