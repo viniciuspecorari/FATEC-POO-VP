@@ -1,0 +1,83 @@
+
+<html>
+    <head>
+        <title>oVinicius - POO</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <section id="cabecalho" style="font-family: sans-serif">
+            <h1>
+                Olá! Esse é o projeto WEB APP<br>
+            </h1>
+            
+           <ul><li><p id="legenda" style="font-size: 22px">
+               <b>Nome:</b><br> Vinicius Pecorari<br>
+            </p></li></ul>     
+            
+            <ul><li><p id="legenda" style="font-size: 22px">
+               <b>RA:</b><br>1290482012015<br>
+            </p></li></ul>
+            
+            <!--Quebrei linha-->
+            <hr style="display: block;
+                margin-top: 0.5em;
+                margin-bottom: 0.5em;
+                margin-left: auto;
+                margin-right: auto;
+                border-style: inset;
+                border-width: 1px;"><br><br>
+            
+            <!---SECTION 1-->
+            <section id="CalcJurosSimples">     
+                <form action="juros-simples.html">
+                    <table>
+                        <tr style="height:60px;">
+                            <th>JUROS SIMPLES</th>
+                        </tr>
+                        <th><p id="legenda">Capital:</p></th>
+                        <th><p id="legenda">Tempo:</p></th>
+                        <th><p id="legenda">Taxa:</p></th>
+                        
+                        <tr>
+                            <th><input type='number' id='capital' name='capital' placeholder='Capital'></th>
+                            <th><input type='number' id='tempo' name='tempo' placeholder='Tempo em meses'></th>
+                            <th><input type='number' id='taxa' name='taxa' placeholder='Taxa %'></th>
+                            <th><input type='submit' value="Calcular"></th>
+                        </tr>
+                       
+                    </table> 
+                </form>     
+            </section>
+            
+            
+            <!---SECTION 2-->
+            <section id="CalcJurosComposto">     
+                <form action="juros-composto.html">
+                    <table>
+                        <tr style="height:60px;">
+                            <th>JUROS COMPOSTO</th>
+                        </tr>
+                        <th><p id="legenda">Capital:</p></th>
+                        <th><p id="legenda">Tempo:</p></th>
+                        <th><p id="legenda">Taxa:</p></th>
+                        
+                        <tr>
+                            <th><input type='number' id='capital' name='capital' placeholder='Capital'></th>
+                            <th><input type='number' id='tempo' name='tempo' placeholder='Tempo em meses'></th>
+                            <th><input type='number' id='taxa' name='taxa' placeholder='Taxa %'></th>
+                            <th><input type='submit' value="Calcular"></th>
+                        </tr>
+                       
+                    </table> 
+                </form>     
+            </section> 
+        </section>
+    </body>
+</html>
+
+            <style>
+                #legenda{
+                   text-align: left;
+                }
+            </style>
