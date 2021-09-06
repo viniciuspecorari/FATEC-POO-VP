@@ -1,0 +1,82 @@
+
+<html>
+    <head>
+        <title>VINICIUS JSP</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <section id="cabecalho" style="font-family: sans-serif">
+            <h1>
+                VP CALENDAR<br>
+            </h1>
+            
+           <ul><li><p id="legenda" style="font-size: 18px">
+               <b>Nome:</b><br>
+               Vinicius Pecorari
+            </p></li></ul>     
+            
+           <ul><li><p id="legenda" style="font-size: 18px">
+               <b>RA:</b><br>
+               1290482012015
+            </p></li></ul>    
+        </section>
+        
+        <hr/>
+        
+        <!--MÊS-->
+        <center>
+        <section>
+            <form action="vp-calendar.jsp" style="font-family: sans-serif; font-weight: bold;">
+                
+                
+                <input type="number" name="mes" required placeholder="O número do Mês"><br>
+                <input type="number" name="ano" required placeholder="O ano"><br>
+                <input type="submit" name="calendario"  value="Consultar">
+            </form>
+        </section>
+        </center>
+        
+    </body>
+</html>
+
+    <style>
+        
+            input[type=number], select {
+            width: 20%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 15px;
+            font-family: sans-serif;
+        }
+        
+          input[type=submit] {
+          width: 20%;
+          background-color: #156DBD;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          margin-left: 0%;
+          font-weight: bold;
+          
+          font-size: 15px;
+          font-family: sans-serif;
+          
+          -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            
+        }
+
+        input[type=submit]:hover {
+            background-color: #156DBD;
+          box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+          
+        }
+    </style>

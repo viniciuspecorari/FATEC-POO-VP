@@ -9,12 +9,12 @@
 <%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    int n1 = 5;
+    int mes = 1;
     
     String error = null;
                
     try {
-                n1 = Integer.parseInt(request.getParameter("n1"));
+                mes = Integer.parseInt(request.getParameter("n1"));
                 
                 
         } catch (Exception e) {
@@ -45,7 +45,7 @@
                 <th>Número</th>
             </tr>
             
-            <%for (int i = 1; i < n1; i++){%>
+            <%for (int i = 1; i < 1; i++){%>
             <tr>
                 
                 <td><%= i %></td>
