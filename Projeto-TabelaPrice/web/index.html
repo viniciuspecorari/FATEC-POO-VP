@@ -1,0 +1,61 @@
+
+<html>
+    <head>
+        <title>oVinicius - POO</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <section id="cabecalho" style="font-family: sans-serif">
+            <h1>
+                Olá! Esse é o projeto Tabela PRICE<br>
+            </h1>
+            
+           <ul><li><p id="legenda" style="font-size: 22px">
+               <b>Nome:</b><br> Vinicius Pecorari<br>
+            </p></li></ul>     
+            
+            <ul><li><p id="legenda" style="font-size: 22px">
+               <b>RA:</b><br>1290482012015<br>
+            </p></li></ul>
+            
+            <!--Quebrei linha-->
+            <hr style="display: block;
+                margin-top: 0.5em;
+                margin-bottom: 0.5em;
+                margin-left: auto;
+                margin-right: auto;
+                border-style: inset;
+                border-width: 1px;"><br><br>
+            
+            <!---SECTION 1-->
+            <section id="CalcJurosSimples">     
+                <form action="resposta-calculo.jsp">
+                    <table>
+                        <tr style="height:60px;">
+                            <th>TABELA PRICE</th>
+                        </tr>
+                        <th><p id="legenda">Valor Financiado:</p></th>
+                        <th><p id="legenda">Taxa de juros:</p></th>
+                        <th><p id="legenda">Quantidade de prestações</p></th>
+                        
+                        <tr>
+                            <th><input type='number' id='capital' name='valor' placeholder='Valor'></th>
+                            <th><input type='number' id='tempo' name='juros' placeholder='juros'></th>
+                            <th><input type='number' id='taxa' name='prestacao' placeholder='prestacao'></th>
+                            <th><input type='submit' value="Calcular"></th>
+                        </tr>
+                       
+                    </table> 
+                </form>     
+            </section>
+                                    
+        </section>
+    </body>
+</html>
+
+            <style>
+                #legenda{
+                   text-align: left;
+                }
+            </style>

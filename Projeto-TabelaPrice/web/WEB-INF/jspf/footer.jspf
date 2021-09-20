@@ -1,0 +1,8 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<hr>
+
+<div style="text-align: center; font-family: sans-serif; font-size: 20px; font-weight: bold;">
+    <div>FATEC - 2021</div>
+    <div><small><u>Vinicius Pecorari</u></small></div>
+</div>
