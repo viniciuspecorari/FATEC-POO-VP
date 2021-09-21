@@ -1,0 +1,9 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+
+<h2>Vinicius Pecorari - APP!</h2>
+<form>
+<a href="<%= request.getContextPath() %>/index.jsp">Principal</a> |
+<a href="<%= request.getContextPath() %>/AboutUs.jsp">About us</a> |
+<hr>
+</form>
