@@ -5,14 +5,15 @@
 <%@ page pageEncoding="UTF-8" %>
 
 <%
-    //Vetor que irá armazenar os usuários
-    ArrayList<String> Usuario = new ArrayList();
-    int tamanho = Usuario.size();
+
+    ArrayList<String> Usuario = new ArrayList(); //Vetor que irá armazenar os usuários online
+    int online = 0;
 
     String nome = request.getParameter("usuario");
     String erro = "";
-    
+
     String sessionUser = null;
+    String UsuarioOnline = null;
 
     int Numeros[] = new int[6];
     int n1 = 0, n2 = 0, n3 = 0, n4 = 0, n5 = 0, n6 = 0;
@@ -24,6 +25,16 @@
         //adicionando o usuario na sessão e no array
         if (nome != null) {
             session.setAttribute("usuario", nome); //adicionando o usuario no vetor
+            
+
+            if (application.getAttribute("online") == null) {
+                application.setAttribute("online", online + 1);
+
+            } else {
+                online = (int) application.getAttribute("online");
+                ++online;
+                application.setAttribute("online", online);
+            }
 
             //gerando numeros aleatorios e não repetidos
             for (int n = 0; n < 6; n++) {
@@ -45,31 +56,43 @@
             session.setAttribute("Numero6", Numeros[5]);
 
             response.sendRedirect("index.jsp");
-            
+
         } //removendo usuario da sessão e do array
         else if (request.getParameter("logout") != null) {
             session.removeAttribute("usuario");
-            
 
-            for (int r = 0; r < tamanho; r++) {
-                if (Usuario.get(r) == sessionUser) {
-                    Usuario.remove(r);
+            for (int i = 0; i < Usuario.size(); i++) {
+                if (Usuario.get(i) == sessionUser) {
+                    Usuario.remove(i);
                 }
+
             }
+
+            online = (int) application.getAttribute("online");
+            --online;
+            application.setAttribute("online", online);
+
             response.sendRedirect("index.jsp");
         }
 
         //lendo atributos
         sessionUser = (String) session.getAttribute("usuario"); //pegando o nome
+        
+        UsuarioOnline = (String) application.getAttribute("UsuariosOnline");//usuario global
+        Usuario.add(UsuarioOnline);//usuario global
+        
+
         n1 = (int) session.getAttribute("Numero1");
         n2 = (int) session.getAttribute("Numero2");
         n3 = (int) session.getAttribute("Numero3");
         n4 = (int) session.getAttribute("Numero4");
         n5 = (int) session.getAttribute("Numero5");
         n6 = (int) session.getAttribute("Numero6");
-        
+
+        online = (int) application.getAttribute("online");
+
     } catch (Exception e) {
-        erro = "Ops. O parâmetro usuario veio vazio.";
+        erro = "Ops. Algum parâmetro veio vazio.";
     }
 %>
 
@@ -77,7 +100,7 @@
     <!-- MENU -->
     <div id="navbar">
         <%if (sessionUser != null) {%>
-         <a href="ViniciusPecorari-Dica-MegaSena.jsp">Mega-sena</a>
+        <a href="ViniciusPecorari-Dica-MegaSena.jsp">Mega-sena</a>
         <a href="ViniciusPecorari.jsp">Aluno</a>
         <a href="index.jsp">Menu Inicial</a>  
         <%}%>
@@ -94,7 +117,7 @@
                     <input type="submit" id="entrar" value="Entrar" />
             </section></center>
             <%} else {%>
-                <input type="submit" name="logout" id="sair" value="Sair"/>
+            <input type="submit" name="logout" id="sair" value="Sair"/>
             <%}%>
         </form>
     </div>   
@@ -120,7 +143,7 @@
         float: right;
         display: block;
         color: #333;
-        
+
         padding: 20px;
         text-decoration: none;
         font-size: 20px;
