@@ -6,8 +6,8 @@
 
 <%
 
-    ArrayList<String> Usuario = new ArrayList(); //Vetor que irá armazenar os usuários online
     int online = 0;
+    int contador=0;
 
     String nome = request.getParameter("usuario");
     String erro = "";
@@ -19,14 +19,18 @@
     int n1 = 0, n2 = 0, n3 = 0, n4 = 0, n5 = 0, n6 = 0;
     int aux = 0;
     Random gerador = new Random();
+    
+    //vetor que vai armazenar o nome dos usuarios
+    String nomeUsuarios[] = new String[100];
+    int loginId = 0;
 
     try {
 
         //adicionando o usuario na sessão e no array
         if (nome != null) {
             session.setAttribute("usuario", nome); //adicionando o usuario no vetor
-            
-
+                       
+            //Contador de usuarios online
             if (application.getAttribute("online") == null) {
                 application.setAttribute("online", online + 1);
 
@@ -35,7 +39,28 @@
                 ++online;
                 application.setAttribute("online", online);
             }
-
+            
+            //verifica se existe um usuario
+            if(application.getAttribute("nomeUsuarios") != null){
+               nomeUsuarios = (String[]) application.getAttribute("nomeUsuarios");
+            }
+            
+            
+            //adicionando no application o vetor de usuarios
+            application.setAttribute("nomeUsuarios", nomeUsuarios);
+            
+            //Pegando posição do usuario
+            for(int i = 0; i < nomeUsuarios.length-1; i++){
+                loginId=i;
+                if(nomeUsuarios[i] == null){
+                    break;
+                }
+            }
+            
+            //salvando na sessão o loginId
+            session.setAttribute("loginId", loginId);
+            
+            
             //gerando numeros aleatorios e não repetidos
             for (int n = 0; n < 6; n++) {
                 aux = gerador.nextInt(60) + 1;
@@ -47,7 +72,8 @@
                     }
                 }
             }
-
+            
+            //lendo os numeros da megasena
             session.setAttribute("Numero1", Numeros[0]);
             session.setAttribute("Numero2", Numeros[1]);
             session.setAttribute("Numero3", Numeros[2]);
@@ -60,37 +86,46 @@
         } //removendo usuario da sessão e do array
         else if (request.getParameter("logout") != null) {
             session.removeAttribute("usuario");
-
-            for (int i = 0; i < Usuario.size(); i++) {
-                if (Usuario.get(i) == sessionUser) {
-                    Usuario.remove(i);
-                }
-
-            }
-
+    
+            //decrementando um usuario online
             online = (int) application.getAttribute("online");
             --online;
-            application.setAttribute("online", online);
-
+            application.setAttribute("online", online);      
+            
+            nomeUsuarios[loginId] = null;
+            application.setAttribute("nomeUsuarios", nomeUsuarios);
+            session.removeAttribute("loginId");
             response.sendRedirect("index.jsp");
         }
 
         //lendo atributos
         sessionUser = (String) session.getAttribute("usuario"); //pegando o nome
         
-        UsuarioOnline = (String) application.getAttribute("UsuariosOnline");//usuario global
-        Usuario.add(UsuarioOnline);//usuario global
         
-
+        //lendo login id e a lista de usuarios
+        loginId = (int) session.getAttribute("loginId");
+        nomeUsuarios = (String[]) application.getAttribute("nomeUsuarios");
+        
+        //adicionando o usuario no vetor
+        if(!sessionUser.equals("")){
+            nomeUsuarios[loginId] = sessionUser;
+        }
+        //adicionando no application
+        application.setAttribute("nomeUsuarios", nomeUsuarios);
+           
+ 
+        //megasena
         n1 = (int) session.getAttribute("Numero1");
         n2 = (int) session.getAttribute("Numero2");
         n3 = (int) session.getAttribute("Numero3");
         n4 = (int) session.getAttribute("Numero4");
         n5 = (int) session.getAttribute("Numero5");
         n6 = (int) session.getAttribute("Numero6");
-
         online = (int) application.getAttribute("online");
 
+        
+   
+        
     } catch (Exception e) {
         erro = "Ops. Algum parâmetro veio vazio.";
     }
