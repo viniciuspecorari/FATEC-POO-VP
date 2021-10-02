@@ -1,0 +1,245 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="java.util.Random"%>
+<%@ page pageEncoding="UTF-8" %>
+
+<%
+    //usuario sessao
+    String Nome = request.getParameter("usuario");
+    String SessionUser = null;
+    String erro = null;
+
+    //numeros aleatorios
+    int Numeros[] = new int[6];
+    int aux = 0;
+    int n1 = 0, n2 = 0, n3 = 0, n4 = 0, n5 = 0, n6 = 0;
+    Random gerador = new Random();
+
+    //usuarios online
+    int online = 0;
+    int OnlineUsuario = 0;
+
+    String nomeUsuario[] = new String[80];
+    int idUsuario = 0;
+
+    try {
+        //usuario inicia sessão
+        if (Nome != null) {
+            session.setAttribute("Nome", Nome);
+
+            //gerando numeros aleatorios
+            for (int n = 0; n < Numeros.length; n++) {
+                aux = gerador.nextInt(60) + 1;
+                for (int j = 0; j < Numeros.length; j++) {
+                    if (aux == Numeros[j] && j != n) {
+                        aux = gerador.nextInt(60) + 1;
+                    } else {
+                        Numeros[n] = aux;
+                    }
+                }
+            }
+            //salvando na sessao do usuario
+            session.setAttribute("Numero1", Numeros[0]);
+            session.setAttribute("Numero2", Numeros[1]);
+            session.setAttribute("Numero3", Numeros[2]);
+            session.setAttribute("Numero4", Numeros[3]);
+            session.setAttribute("Numero5", Numeros[4]);
+            session.setAttribute("Numero6", Numeros[5]);
+
+            //Verificar se existe alguem online
+            if (application.getAttribute("online") == null) {
+                application.setAttribute("online", online + 1);
+            } else {
+                online = (int) application.getAttribute("online");
+                ++online;
+                application.setAttribute("online", online);
+            }
+
+            //criando lista de usuarios
+            if (application.getAttribute("nomeUsuario") != null) {
+                nomeUsuario = (String[]) application.getAttribute("nomeUsuario");
+            }
+
+            application.setAttribute("nomeUsuario", nomeUsuario);
+
+            for (int i = 0; i < nomeUsuario.length - 1; i++) {
+                idUsuario = i;
+                if (nomeUsuario[i] == null) {
+                    break;
+                }
+            }
+            session.setAttribute("idUsuario", idUsuario);
+            response.sendRedirect("index.jsp");
+
+        } else if (request.getParameter("logout") != null) {
+            session.removeAttribute("Nome");
+
+            online = (int) application.getAttribute("online");
+            --online;
+            application.setAttribute("online", online);
+            
+            nomeUsuario[idUsuario] = null;
+            application.setAttribute("nomeUsuario", nomeUsuario);
+            session.removeAttribute("idUsuario");
+            
+            response.sendRedirect("index.jsp");
+        }
+
+        //Ler parametros
+        SessionUser = (String) session.getAttribute("Nome"); //pegando o nome   
+        n1 = (int) session.getAttribute("Numero1");
+        n2 = (int) session.getAttribute("Numero2");
+        n3 = (int) session.getAttribute("Numero3");
+        n4 = (int) session.getAttribute("Numero4");
+        n5 = (int) session.getAttribute("Numero5");
+        n6 = (int) session.getAttribute("Numero6");
+        OnlineUsuario = (int) application.getAttribute("online");
+
+        idUsuario = (int) session.getAttribute("idUsuario");
+        nomeUsuario = (String[]) application.getAttribute("nomeUsuario");
+
+        if (!SessionUser.equals("")) {
+            nomeUsuario[idUsuario] = SessionUser;
+        }
+
+    } catch (Exception e) {
+        erro = "Ops. Algum parâmetro veio vazio.";
+    }
+
+
+%>
+
+
+
+<header>
+
+    <!-- MENU -->
+    <div id="menu">
+        <% if (SessionUser != null) {%>
+        <a href="ViniciusPecorari-MegaSena.jsp">Mega-sena</a>
+        <a href="ViniciusPecorari.jsp">Aluno</a>
+        <a href="index.jsp">Menu inicial</a>
+        <%}%>
+
+        <div id="titulo">
+            <% if (SessionUser != null) {%> Bem vindo, <%= SessionUser%><%} else {%>Vinicius Pecorari<%}%>
+        </div>
+    </div>
+
+
+
+    <!-- LOGIN -->
+    <div class="login">
+        <form>
+            <center>
+                <section id="login">
+                    <% if (SessionUser
+                                == null) {%>
+                    <input type="text" name="usuario" required placeholder="Usuário"/><br>
+                    <input type="submit" id="entrar" value="Entrar" />
+                    <%} else {%>
+                    <input type="submit" id="logout" name="logout" value="Sair"/>
+                    <%}%>
+                </section>
+            </center>
+        </form>
+    </div>
+
+
+    <style>
+        header{
+            font-family: sans-serif;
+            margin-bottom: 5%;
+        }
+        #menu{
+            background-color: white;
+            position: block;
+            width: 100%;
+            display: block;
+            transition: top 0.3s;
+            text-align: center;
+        }
+        #menu a{
+            float: right;
+            display: block;
+            color: #333;
+
+            padding:20px;
+            padding-top: 25px;
+            padding-right: 60px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+
+        }
+        #menu a:hover{
+            background-color: #808080;
+            color: white;
+        }
+        #entrar, input[type=submit],[name=entrar]{
+            background-color: #15C97C;
+            width: 15%;
+            color:white;
+            padding: 13px 20px;
+            margin: 8px 0%;
+            border:none;
+            border-radius: 4px;
+            cursor:pointer;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 17px;
+        }
+        #entrar, input[type=submit],[name=entrar]:hover{
+            background-color: #15C97C;
+        }
+        #logout, input[type=submit],[name=logout]{
+            background-color: #f44336;
+            width: 15%;
+            color:white;
+            padding: 14px 20px;
+            margin: 8px 0%;
+            border:none;
+            border-radius: 4px;
+            cursor:pointer;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 17px; 
+        }
+        #logout{
+            float:right;
+
+        }
+        #logout, input[type=submit],[name=logout]: hover{
+            background-color: #f44336;
+        }
+        #login{
+            margin-top: 3%;
+        }
+        input[type=text], select{
+            width: 15%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border:1px solid grey;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            font-size: 17px;
+            color: black;
+        }
+        #titulo{
+            font-size: 25px;
+            text-align: left;
+            padding: 22px;
+            top:10px;
+            font-weight: bold;
+        }
+
+
+    </style>
+
+</header
+
+
+
+
+
