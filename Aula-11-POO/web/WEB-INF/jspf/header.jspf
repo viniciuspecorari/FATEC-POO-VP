@@ -1,0 +1,16 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="java.util.Date"%>
+<%@page import="model.horario"%>
+<%@ page pageEncoding="UTF-8" %>
+<%
+    Date now = new Date();
+    horario atual  = new horario(now.getHours(), now.getMinutes(), now.getSeconds());
+    horario intervalo = new horario(21, 30, 00);
+%>
+<h1>Vinicius Pecorari - 1290482012015</h1>
+<h2>Horário atual: <%= atual.getHorario() %></h2>
+<h3>Horário do intervalo: <%= intervalo.getHorario()%></h3>
+<a href="Index.jsp">Inicio</a> |
+<a href="data.jsp">Classe data</a> |
+<a href="contatos.jsp">Contatos</a>
+<hr>

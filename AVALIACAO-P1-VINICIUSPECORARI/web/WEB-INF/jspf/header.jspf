@@ -152,7 +152,7 @@
         }
         #menu{
             background-color: white;
-            position: block;
+            
             width: 100%;
             display: block;
             transition: top 0.3s;
@@ -208,7 +208,7 @@
             float:right;
 
         }
-        #logout, input[type=submit],[name=logout]: hover{
+        #logout, input[type=submit],[name=logout]:hover{
             background-color: #f44336;
         }
         #login{
