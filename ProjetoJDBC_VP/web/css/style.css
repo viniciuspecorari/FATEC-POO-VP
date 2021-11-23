@@ -1,0 +1,42 @@
+@import url('https://rsms.me/inter/inter.css');
+html { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter var', sans-serif; }
+}
+
+#menu{
+    width: 100%; 
+    padding-left: 50%;
+}
+
+#textoMenu{
+    font-family: inter;      
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    
+}
+.nav-link:hover{
+    color:grey;
+}
+li{
+}
+#tituloLogo{
+    font-family: inter;      
+    font-size: 28px;
+    color: #003C70;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#HEADER{
+    width: 100%;
+    /*background-color: #1D1D1D;*/
+    background-color:white;
+    box-shadow: 5px 5px #003C70, -1em 0 0.4em olive;
+    margin-bottom: 5%;
+    
+}
+
+#formulario{
+    padding-left: 60%;
+}

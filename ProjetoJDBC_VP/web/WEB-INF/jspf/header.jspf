@@ -1,0 +1,69 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+
+<%
+
+    String nome = request.getParameter("nome");
+    String sessionUser = null;
+    String Erro = "Ops. Houve um erro.";
+
+    try {
+
+        // login
+        if (nome != null) {
+            session.setAttribute("nome", nome);
+        } else if (request.getParameter("logout") != null) {
+            session.removeAttribute("nome");
+        }
+
+    } catch (Exception e) {
+
+    }
+
+    //lendo parametros
+    sessionUser = (String) session.getAttribute("nome"); //pegando o nome   
+%>
+
+
+
+
+
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<div class="container-fluid" id="HEADER">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" >               
+                <span id="tituloLogo">Bem-vindo<% if (sessionUser != null) {%>, <%= sessionUser%><%}%></span>
+            </a>
+        </div>
+
+
+        <div class="container-fluid">
+            <form id="formulario">
+                <div class="row">
+                    <% if (sessionUser == null) {%>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Login" required/>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary" name="enviar" value="Entrar"> Entrar</button>
+                    </div>
+
+
+                    <%} else {%>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary" name="logout" value="Sair">Sair</button>
+                    </div>
+                    <%}%>
+            </form>
+        </div>
+</div>
+</nav>
+</div>

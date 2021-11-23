@@ -13,28 +13,47 @@ import web.DbListener;
  *
  * @author Desenvolvedor
  */
-public class TaskConnector {
+public class TasksConnector{
 
     public static ArrayList<String> getTasks() throws Exception {
         ArrayList<String> list = new ArrayList<>();
+        
         Connection con = DbListener.getConnection();
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("select * from tasks");
+        ResultSet rs = stmt.executeQuery("select * from VP_TASKS");
         while (rs.next()) {
-            list.add(rs.getString("TITLE"));
+            list.add(rs.getString("TITLE"));            
         }
-
+            
+            
         rs.close();
         stmt.close();
         con.close();
         return list;
     }
+    
+    public static ArrayList<String> getUsers() throws Exception {
+        
+        ArrayList<String> listNomes = new ArrayList<>();
+        Connection con = DbListener.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("select * from VP_TASKS");
+        while (rs.next()) {
+            listNomes.add(rs.getString("NM_USER"));          
+        }
+            
+            
+        rs.close();
+        stmt.close();
+        con.close();
+        return listNomes;
+    }
 
-    public static void addTask(String taskName, String UserName) throws Exception {
+    public static void addTask(String taskName, String nomeUser) throws Exception {
 
         Connection con = DbListener.getConnection();
         Statement stmt = con.createStatement();
-        stmt.execute("insert into tasks values('" + taskName + "', '"+UserName+"')");
+        stmt.execute("insert into VP_TASKS values(null, '" + taskName + "', '"+nomeUser+"')");
         stmt.close();
         con.close();
 
@@ -44,7 +63,7 @@ public class TaskConnector {
 
         Connection con = DbListener.getConnection();
         Statement stmt = con.createStatement();
-        stmt.execute("delete from tasks where name = '" + taskName + "'");
+        stmt.execute("delete from VP_TASKS where TITLE = '" + taskName + "'");
         stmt.close();
         con.close();
 

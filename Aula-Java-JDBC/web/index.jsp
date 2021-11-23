@@ -19,7 +19,7 @@
     try {
         if (request.getParameter("add") != null) {
             String taskName = request.getParameter("taskName");
-            TaskConnector.addTask(taskName);
+            TaskConnector.addTask(taskName, "dasda");
             response.sendRedirect(request.getRequestURI());
 
         }
